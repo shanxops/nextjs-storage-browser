@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update": "npm i --save @aws-amplify/ui-react-storage@storage-browser-alpha aws-amplify@storage-browser-integrity @aws-amplify/storage@storage-browser-integrity"
   },
   "dependencies": {
     "@aws-amplify/storage": "storage-browser-integrity",
