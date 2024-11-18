@@ -1,21 +1,21 @@
 'use client';
 import React from "react";
-import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 
-import { Button, withAuthenticator, Text, View, Flex } from "@aws-amplify/ui-react";
+import { Button, Text, View, Flex } from "@aws-amplify/ui-react";
 
 import "@aws-amplify/ui-react-storage/styles.css";
 import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
 
-import config from "../amplify_outputs.json";
-import { StorageBrowser } from "@aws-amplify/ui-react-storage";
-
 import { VERSION as AMPLIFY_VERSION } from './version-aws-amplify'
 import { VERSION as AMPLIFY_UI_VERSION } from './version-aws-amplify-ui-react-storage'
+import { managedAuthAdapter } from "./managedAuthAdapter";
+import { componentsDefault, createStorageBrowser } from "@aws-amplify/ui-react-storage/browser";
 
-
-Amplify.configure(config);
+const { StorageBrowser } = createStorageBrowser({
+  config: managedAuthAdapter,
+  components: componentsDefault
+});
 
 function Example() {
   return (
@@ -40,11 +40,8 @@ function Example() {
         <Text>ui-react-storage: {AMPLIFY_UI_VERSION}</Text></Flex>
 
       <View flex="1" overflow="hidden">
-
-      <StorageBrowser />
+        <StorageBrowser />
       </View>
     </Flex>
   );
 }
-
-export default withAuthenticator(Example);
