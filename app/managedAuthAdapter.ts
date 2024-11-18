@@ -9,7 +9,7 @@ type Credentials = Awaited<ReturnType<CredentialsProvider>>;
 export class Auth {
   #persistCredentials: boolean;
   #credentials: Credentials | undefined;
-  #onAuthStatusChange: () => void | undefined;
+  #onAuthStatusChange: (() => void) | undefined = undefined;
 
   constructor(options?: { persistCredentials?: boolean }) {
     const { persistCredentials = false } = options ?? {};
@@ -25,10 +25,10 @@ export class Auth {
 
   #getCredentials(): Credentials {
     if (this.#persistCredentials) {
-      return JSON.parse(localStorage.getItem("creds"));
+      return JSON.parse(localStorage.getItem("creds")!);
     }
 
-    return this.#credentials;
+    return this.#credentials!;
   }
 
   #setCredentials(credentials: Credentials) {
@@ -46,6 +46,7 @@ export class Auth {
     if (forceRefresh) {
       this.#clearCredentials();
     }
+
     const credentials = this.#getCredentials();
     if (!forceRefresh && credentials) {
       return credentials;
@@ -53,7 +54,7 @@ export class Auth {
 
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_MANAGED_AUTH_ENDPOINT
+        process.env.NEXT_PUBLIC_MANAGED_AUTH_ENDPOINT!
       );
 
       const data = await response.json();
@@ -76,6 +77,8 @@ export class Auth {
       if (e instanceof Error) {
         throw new Error(e.message);
       }
+
+      throw e;
     }
   }
 
@@ -97,7 +100,7 @@ export class Auth {
       await this.#fetchCredentials({ forceRefresh });
       onSignIn?.();
     } catch (e) {
-      onError?.(e);
+      onError?.(e as Error);
     }
   }
 
@@ -111,7 +114,7 @@ export const auth = new Auth();
 
 export const managedAuthAdapter = createManagedAuthAdapter({
   credentialsProvider: auth.credentialsProvider,
-  region: process.env.NEXT_PUBLIC_MANAGED_AUTH_REGION,
-  accountId: process.env.NEXT_PUBLIC_MANAGED_AUTH_ACCOUNT_ID,
+  region: process.env.NEXT_PUBLIC_MANAGED_AUTH_REGION!,
+  accountId: process.env.NEXT_PUBLIC_MANAGED_AUTH_ACCOUNT_ID!,
   registerAuthListener: auth.registerAuthListener,
 });

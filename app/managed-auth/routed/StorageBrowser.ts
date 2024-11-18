@@ -1,3 +1,5 @@
+"use client";
+
 import { Auth } from "../../managedAuthAdapter";
 import {
   createManagedAuthAdapter,

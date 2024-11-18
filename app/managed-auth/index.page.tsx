@@ -1,17 +1,22 @@
-import React from 'react';
+"use client";
 
-import { componentsDefault, createStorageBrowser } from '@aws-amplify/ui-react-storage/browser';
+import React from "react";
 
-import { managedAuthAdapter } from '../managedAuthAdapter';
-import { SignIn, SignOutButton } from './routed/components';
+import {
+  componentsDefault,
+  createStorageBrowser,
+} from "@aws-amplify/ui-react-storage/browser";
 
-import '@aws-amplify/ui-react-storage/storage-browser-styles.css';
-import '@aws-amplify/ui-react-storage/styles.css';
-import { Flex, View } from '@aws-amplify/ui-react';
+import { managedAuthAdapter } from "../managedAuthAdapter";
+import { SignIn, SignOutButton } from "./routed/components";
+
+import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
+import "@aws-amplify/ui-react-storage/styles.css";
+import { Flex, View } from "@aws-amplify/ui-react";
 
 const { StorageBrowser } = createStorageBrowser({
   config: managedAuthAdapter,
-  components: componentsDefault
+  components: componentsDefault,
 });
 
 function Example() {
@@ -30,7 +35,7 @@ function Example() {
       <SignOutButton onSignOut={() => setShowSignIn(false)} />
       <View flex="1" overflow="hidden">
         <StorageBrowser
-          displayText={{ LocationsView: { title: 'Home - Managed Auth' } }}
+          displayText={{ LocationsView: { title: "Home - Managed Auth" } }}
         />
       </View>
     </Flex>

@@ -1,27 +1,35 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+"use client";
 
-import { Flex } from '@aws-amplify/ui-react';
+import React from "react";
+import { useRouter } from "next/router";
 
-import { SignOutButton } from '../components';
-import { StorageBrowser, useView } from '../StorageBrowser';
+import { Flex } from "@aws-amplify/ui-react";
 
-import '@aws-amplify/ui-react-storage/storage-browser-styles.css';
-import '@aws-amplify/ui-react-storage/styles.css';
+import { SignOutButton } from "../components";
+import { StorageBrowser, useView } from "../StorageBrowser";
+
+import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
+import "@aws-amplify/ui-react-storage/styles.css";
 
 function Locations() {
   const router = useRouter();
+
+  if (!StorageBrowser.LocationsView) {
+    return null;
+  }
 
   return (
     <Flex direction="column">
       <SignOutButton
         onSignOut={() => {
-          router.replace(router.pathname.replace('[locations]', ''));
+          router.replace(router.pathname.replace("[locations]", ""));
         }}
       />
 
       <StorageBrowser.Provider
-        displayText={{ LocationsView: { title: 'Home - Routed Managed Auth' } }}
+        displayText={{
+          LocationsView: { title: "Home - Routed Managed Auth" },
+        }}
       >
         <StorageBrowser.LocationsView
           onNavigate={(location) => {

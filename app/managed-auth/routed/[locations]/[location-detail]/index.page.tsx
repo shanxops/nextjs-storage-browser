@@ -1,12 +1,14 @@
-import { useRouter } from 'next/router';
+"use client";
 
-import { Flex } from '@aws-amplify/ui-react';
+import { useRouter } from "next/router";
 
-import { SignOutButton } from '../../components';
-import { StorageBrowser } from '../../StorageBrowser';
+import { Flex } from "@aws-amplify/ui-react";
 
-import '@aws-amplify/ui-react-storage/storage-browser-styles.css';
-import '@aws-amplify/ui-react-storage/styles.css';
+import { SignOutButton } from "../../components";
+import { StorageBrowser } from "../../StorageBrowser";
+
+import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
+import "@aws-amplify/ui-react-storage/styles.css";
 
 export default function Page() {
   const { back, query, pathname, replace } = useRouter();
@@ -17,20 +19,27 @@ export default function Page() {
 
   // `useRouter` cannot force a query parameter to be array, however the `permissions` has to be array.
   // When there's only 1 permission (e.g. ['list']), we need to force the `permissions` to be an array.
-  if (typeof location.permissions === 'string') {
+  if (typeof location.permissions === "string") {
     location.permissions = [location.permissions];
+  }
+
+  if (
+    !StorageBrowser.LocationDetailView ||
+    !StorageBrowser.LocationActionView
+  ) {
+    return null;
   }
 
   return (
     <Flex>
       <SignOutButton
         onSignOut={() => {
-          replace(pathname.replace('[locations]/[location-detail]', ''));
+          replace(pathname.replace("[locations]/[location-detail]", ""));
         }}
       />
       <StorageBrowser.Provider
         actionType={
-          typeof query.actionType === 'string' ? query.actionType : undefined
+          typeof query.actionType === "string" ? query.actionType : undefined
         }
         location={location as any}
         path={path as string}
@@ -39,7 +48,7 @@ export default function Page() {
           onActionSelect={(actionType) => {
             replace({ query: { ...query, actionType } });
           }}
-          onNavigate={(location, path = '') => {
+          onNavigate={(location, path = "") => {
             if (!location) {
               return;
             }
@@ -49,7 +58,7 @@ export default function Page() {
             back();
           }}
         />
-        {typeof query.actionType === 'string' ? (
+        {typeof query.actionType === "string" ? (
           <dialog open={!!query.actionType}>
             <StorageBrowser.LocationActionView
               onExit={() => {
