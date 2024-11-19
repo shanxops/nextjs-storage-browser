@@ -13,8 +13,8 @@ import {
 } from "@aws-amplify/ui-react-storage/browser";
 import { SignIn, SignOutButton } from "./managed-auth/routed/components";
 
-import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
-import "@aws-amplify/ui-react-storage/styles.css";
+import "@aws-amplify/ui-react/styles/reset.css"; // optional, adds standard css reset
+import "@aws-amplify/ui-react-storage/styles.css"; // storage browser styling
 
 const { StorageBrowser } = createStorageBrowser({
   config: managedAuthAdapter,

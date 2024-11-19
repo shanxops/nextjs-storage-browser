@@ -1,1 +1,1 @@
-export const VERSION = '6.7.1-storage-browser-integrity.d8c0a68.0+d8c0a68';
+export const VERSION = '6.8.3-storage-browser-integrity.34fba2d.0+34fba2d';

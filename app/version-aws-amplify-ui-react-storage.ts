@@ -1,1 +1,1 @@
-export const VERSION = '0.0.0-storage-browser-alpha-7ba82bc-20241118180736';
+export const VERSION = '0.0.0-storage-browser-alpha-e18d186-20241119023645';
