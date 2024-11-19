@@ -5,8 +5,8 @@ import { signOut } from "aws-amplify/auth";
 
 import { Button, withAuthenticator, Text, View, Flex } from "@aws-amplify/ui-react";
 
-import "@aws-amplify/ui-react/styles/reset.css";
-import "@aws-amplify/ui-react-storage/styles.css";
+import "@aws-amplify/ui-react/styles/reset.css"; // optional, adds standard css reset
+import "@aws-amplify/ui-react-storage/styles.css"; // storage browser styling
 
 import config from "../amplify_outputs.json";
 import { StorageBrowser } from "@aws-amplify/ui-react-storage";
