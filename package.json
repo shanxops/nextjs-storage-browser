@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules package-lock.json",
-    "reinstall": "npm install aws-amplify@storage-browser-integrity @aws-amplify/storage@storage-browser-integrity @aws-amplify/ui-react-storage@storage-browser-alpha ",
+    "reinstall": "npm install aws-amplify@unstable @aws-amplify/storage@unstable @aws-amplify/ui-react-storage@next",
     "reset": "npm run clean && npm run reinstall",
     "dev": "npm run getversion && next dev",
     "getversion": "node ./scripts/getVersion.js",
