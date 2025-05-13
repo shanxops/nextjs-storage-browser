@@ -22,11 +22,7 @@ function Example() {
     config: createAmplifyAuthAdapter({
       options: {
         defaultPrefixes: [
-          "media-readwritedelete/",
-          "media-readonly/",
-          "shared-folder-readwrite/",
-          (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
-          (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
+          "/"
         ],
       },
     }),
